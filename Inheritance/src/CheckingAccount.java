@@ -1,37 +1,41 @@
+//Sub-class of super class Account
 
 public class CheckingAccount extends Account {
 	
-	private double credit_limit, interest, loan_interest;
+	private double creditLimit, interest, loanInterest; //private class variable
 	
-	public CheckingAccount(double bal) {
-		super(bal);
+	public CheckingAccount(double bal) { //sub-class constructor to initialize class variables
+		super(bal); //explicit call for superclass constructor
 		interest = 0.1;
-		loan_interest = 0.07;
-		credit_limit=-100;
+		loanInterest = 0.07;
+		creditLimit=-100;
 	}
 	
-	public double getInterest() {
+	public double getInterest() { //getter for variable interest
 		return interest;
 	}
 	
-	public double getCreditLimit() {
-		return credit_limit;
+	public double getCreditLimit() { //getter for variable creditLimit
+		return creditLimit;
 	}
 	
-	public double getLoanInterest() {
-		return loan_interest;
+	public double getLoanInterest() { //getter for variable loanInterest
+		return loanInterest;
 	}
 
 	@Override
-	public String debit(double money) {
-		if(super.getBalance()-money<getCreditLimit()) {
-			return "debit exceeds credit limit";
+	public String debit(double money) { //method that overrides superclass debit method
+		
+		if(super.getBalance()-money<getCreditLimit()) { //checks if debit amount exceeds credit limit
+			return "debit exceeds credit limit"; 		//when it exceeds, returns error message in string
 		}
-		super.setBalance(super.getBalance()-money);
-		return null;
+		
+		super.setBalance(super.getBalance()-money); 	//when it is valid amount, sets the subtracted amount
+		return null;						//same as return 0 in c programming, when exited normally
 	}
 	
-	public void nextMonth() {
+	public void nextMonth() { //method that calculates next month's balance depending on the balance left
+		
 		if(super.getBalance() > 0) {
 			super.setBalance(super.getBalance()+super.getBalance()*getInterest());
 		} else if(getBalance() < 0) {
