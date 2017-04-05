@@ -12,8 +12,9 @@ public class CheckingAccount extends Account {
 		creditLimit=-cl;
 	}
 
+	//method that overrides superclass debit method
 	@Override
-	public String debit(double money) { //method that overrides superclass debit method
+	public String debit(double money) { 
 		
 		if(super.getBalance()-money<creditLimit) { //checks if debit amount exceeds credit limit
 			return "debit exceeds credit limit"; 		//when it exceeds, returns error message in string
@@ -23,7 +24,8 @@ public class CheckingAccount extends Account {
 		return null;						//same as return 0 in c programming, when exited normally
 	}
 	
-	public void nextMonth() { //method that calculates next month's balance depending on the balance left
+	//method that calculates next month's balance depending on the balance left
+	public void nextMonth() { 
 		
 		if(getBalance() > 0) {
 			setBalance(getBalance()+getBalance()*interest);
@@ -32,6 +34,7 @@ public class CheckingAccount extends Account {
 		}
 	}
 	
+	//returns amount that can be withdrawn
 	public double getWithdrawableAccount() {
 		if(getBalance()>=0) {
 			return getBalance()-creditLimit;
