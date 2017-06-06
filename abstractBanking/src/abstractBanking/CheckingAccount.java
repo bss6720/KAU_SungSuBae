@@ -12,6 +12,18 @@ public class CheckingAccount extends Account {
 		creditLimit=-cl;
 	}
 
+	public double getInterest() { //getter for variable interest
+		return interest;
+	}
+	
+	public double getCreditLimit() { //getter for variable creditLimit
+		return creditLimit;
+	}
+	
+	public double getLoanInterest() { //getter for variable loanInterest
+		return loanInterest;
+	}
+	
 	//method that overrides superclass debit method
 	@Override
 	public String debit(double money) { 

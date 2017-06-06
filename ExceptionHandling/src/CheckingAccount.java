@@ -1,5 +1,5 @@
 
-public class CheckingAccount extends Account {
+public class CheckingAccount extends Account implements Valuable{
 	
 	private double creditLimit, interest, loanInterest; //private class variable
 	
@@ -10,15 +10,24 @@ public class CheckingAccount extends Account {
 		creditLimit=-cl;
 	}
 
+	public double getInterest() { //getter for variable interest
+		return interest;
+	}
+	
+	public double getCreditLimit() { //getter for variable creditLimit
+		return creditLimit;
+	}
+	
+	public double getLoanInterest() { //getter for variable loanInterest
+		return loanInterest;
+	}
+	
 	//method that overrides superclass debit method
 	@Override
 	public void debit(double amount) throws Exception{ 
-		if(amount<0) throw new Exception("amount is negative");
-		if(super.getBalance()-amount<creditLimit) { //checks if debit amount exceeds credit limit
-			throw new Exception("debit exceeds credit limit"); 		//when it exceeds, returns error message in string
-		}
-		
-		super.setBalance(super.getBalance()-amount); 	//when it is valid amount, sets the subtracted amount
+		if(getBalance()-amount<creditLimit) throw new Exception("한도초과");
+		else if(amount<0) throw new Exception("음수입력");
+		setBalance(getBalance()-amount);
 	}
 	
 	//method that calculates next month's balance depending on the balance left
@@ -43,7 +52,6 @@ public class CheckingAccount extends Account {
 			return -(creditLimit-getBalance());
 		}
 	}
-	
 	public void passTime(int months) {
 		if(getBalance()>=0){
 			setBalance(getBalance()+getBalance()*interest*months);
@@ -60,5 +68,14 @@ public class CheckingAccount extends Account {
 		else{
 			return false;
 		}
+	}
+	
+	public double EstimateValue(int months) {
+		passTime(months);
+		return getBalance();
+	}
+	
+	public String toString(){
+		return String.format("CheckingAccount_Balance: %.2f",getBalance());
 	}
 }

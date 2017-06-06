@@ -11,8 +11,12 @@ public abstract class Account {
 		balance+=money;
 	}
 	
-	public void debit(double amount) throws Exception{
-		balance-=amount;
+	public String debit(double money) {
+		if(money>balance) {
+			return "Debit exceeds the credit limit";
+		}
+		balance-=money;
+		return null;
 	}
 	
 	public double getBalance() {
