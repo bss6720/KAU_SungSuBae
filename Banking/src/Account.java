@@ -1,25 +1,25 @@
 
 public class Account {
 	
-	private double bal;
+	private double balance;
 	
 	public Account(double bal) {
-		this.bal=bal;
+		this.balance=bal;
 	}
 	
 	public void credit(double money) {
-		bal+=money;
+		balance+=money;
 	}
 	
 	public int debit(double money) {
-		if(money>bal) {
+		if(money>balance) {
 			return -1;
 		}
-		bal-=money;
+		balance-=money;
 		return 0;
 	}
 	
 	public double getBalance() {
-		return bal;
+		return balance;
 	}
 }
